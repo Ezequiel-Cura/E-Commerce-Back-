@@ -17,10 +17,10 @@ connectDB()
 
 // mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.ipxfoyc.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`);
 // const connection = mongoose.connection;
-// connection.once("open",()=>{
+// mongoose.connection.once("open",()=>{
 //     console.log("Mongodb connection stablished")
 // })
-// connection.on("error",(err)=>{
+// mongoose.connection.on("error",(err)=>{
 //     console.log(err)
 //     process.exit(0)
 // })

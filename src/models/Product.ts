@@ -5,7 +5,8 @@ export interface IProduct extends Document{
     name:string,
     quantity:number,
     product_id:string,
-    product_image:string
+    product_image:string,
+    product_price:number
 }
 
 const productSchema = new Schema({
@@ -13,13 +14,19 @@ const productSchema = new Schema({
         type:String
     },
     name:{
-        type:String
+        type:String,
+        unique:true,
+        require:true
     },
     quantity:{
         type:Number
     },
     product_image:{
         type:String
+    },
+    product_price:{
+        type:Number,
+        require:true
     }
 })
 

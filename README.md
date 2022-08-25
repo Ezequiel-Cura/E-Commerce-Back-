@@ -8,8 +8,6 @@ Tecnologies
 -Cloudinary
 -Auth0
 
-
-
 Steps to use the code
 
 
