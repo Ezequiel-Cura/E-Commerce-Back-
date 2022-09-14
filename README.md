@@ -7,6 +7,8 @@ Tecnologies
 -Express
 -Cloudinary
 -Auth0
+-Joi
+
 
 Steps to use the code
 

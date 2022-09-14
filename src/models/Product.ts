@@ -3,10 +3,14 @@ import {model,Schema,Document} from "mongoose"
 
 export interface IProduct extends Document{
     name:string,
-    quantity:number,
+    stock:number,
     product_id:string,
     product_image:string,
-    product_price:number
+    product_price:number,
+    presentation:string,
+    categories: Array<string>,
+    out_of_stcok: boolean,
+    variants: Array<string>
 }
 
 const productSchema = new Schema({
@@ -18,7 +22,7 @@ const productSchema = new Schema({
         unique:true,
         require:true
     },
-    quantity:{
+    stock:{
         type:Number
     },
     product_image:{
@@ -27,7 +31,27 @@ const productSchema = new Schema({
     product_price:{
         type:Number,
         require:true
+    },
+    presentation:{
+        type: String,
+        require:true
+    },
+    categories:{
+        type: [String]
+    },
+    out_of_stock:{
+        type:Boolean,
+        default:false
+    },
+    variants:{
+        type:[String]
+    },
+    feature:{
+        type:Boolean,
+        default: false
     }
+    },{
+    timestamps:true
 })
 
 

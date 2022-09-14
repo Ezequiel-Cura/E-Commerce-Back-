@@ -8,6 +8,7 @@ const connectDB = async () => {
 try {
     const db = await mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.ipxfoyc.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`);
     console.log("Mongodb is connected to", db.connection.host);
+    console.log("Si no muestra cambios fijate si compilaste")
 } catch (error) {
     console.error(error);
 }
@@ -15,6 +16,9 @@ try {
 
 connectDB()
 
+
+// OTRA FORMA DE CONECTAR A LA DB
+//(Esta son con funciones de moongose)
 // mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.ipxfoyc.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`);
 // const connection = mongoose.connection;
 // mongoose.connection.once("open",()=>{
