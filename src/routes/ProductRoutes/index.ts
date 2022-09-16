@@ -9,7 +9,7 @@ import getProducts from "./getProducts"
 router.use("/create",createProduct)
 router.use("/delete",deleteProduct)
 router.use("/update",updateProduct)
-router.use("/getProducts",getProducts)
+router.use("/getAllProducts",getProducts)
 
 
 

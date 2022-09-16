@@ -23,12 +23,11 @@ const schema = Joi.object({
 
 
 router.post("/",async(req:Request,res)=>{
-    const {name,stock,product_price,presentation,categories_string} = req.body
-    const categories = categories_string.length === "" ? [] : JSON.parse(categories_string)
-    const variants = req.body.variants.length === "" ? [] : JSON.parse(req.body.variants)
     console.log("BODY\n",req.body)
-    // console.log("FILES\n",req.files)
-    // console.log("HEADERS\n",req.headers)
+    const {name,stock,product_price,presentation,categories_string} = req.body
+    const categories = categories_string.length === 0 ? [] : JSON.parse(categories_string)
+    const variants = req.body.variants.length === 0 ? [] : JSON.parse(req.body.variants)
+  
     try {
         const {error} = schema.validate({
             name:name,
@@ -46,7 +45,7 @@ router.post("/",async(req:Request,res)=>{
 
         
         const img_obj = await uploadImage(`${product_image?.tempFilePath}`)
-        // console.log("IMG",img_obj)
+        
         
         const product = await Product.create({
             product_id: uuidv4(),
