@@ -1,8 +1,8 @@
-import {Router} from "express"
+import { Request,Response } from "express";
 import Product from "../../models/Product"
-const router = Router()
 
-router.get("/",async(req,res)=>{
+
+const getProductsController = async (req: Request,res:Response)=>{
     try {
         const products = await Product.find()
         res.send({
@@ -12,6 +12,6 @@ router.get("/",async(req,res)=>{
     } catch (error) {
         res.send({"msg": "An error ocurre at getProducts:\n" + error})
     }
-})
+}
 
-export default router
+export default getProductsController

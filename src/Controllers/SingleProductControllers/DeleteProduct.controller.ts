@@ -1,8 +1,8 @@
-import {Router} from "express"
+import { Request,Response } from "express";
 import Product from "../../models/Product"
-const router = Router()
 
-router.delete("/",async(req,res)=>{
+
+const deleteProduct = async (req: Request, res: Response)=>{
     try {
         const {name} = req.body
         await Product.deleteOne({name : name})
@@ -11,6 +11,6 @@ router.delete("/",async(req,res)=>{
     } catch (error) {
         res.send({"msg": "An Error ocurred at deleteProducts: " + error})
     }
-})
+}
 
-export default router
+export default deleteProduct
