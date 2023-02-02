@@ -3,7 +3,10 @@ import {model,Schema,Document} from "mongoose"
 export interface IUser extends Document{
     email:string,
     password:string,
-    name:string
+    name:string,
+    isAdmin:boolean,
+    img:string,
+    refreshToken:string
 }
 
 
@@ -24,6 +27,14 @@ const userSchema = new Schema({
     isAdmin:{
         type:Boolean,
         default:false
+    },
+    img:{
+        type:String,
+        default:"e-commerce/uknown-user.jpg"
+    },
+    refreshToken:{
+        type:String,
+        default:""
     }
     
 });

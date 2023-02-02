@@ -3,6 +3,7 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors"
 import router from "./routes";
+import cookieParser from "cookie-parser"
 
 import fileUpload from "express-fileupload";
 
@@ -14,7 +15,11 @@ app.set("port", process.env.PORT || 5000)
 
 //Middlewares
 app.use(morgan("dev"))
+
+app.use(cookieParser())
+
 app.use(bodyParser.json())
+
 app.use(bodyParser.urlencoded({
     extended:true
 }))
@@ -24,9 +29,10 @@ app.use(fileUpload({
 }))
 
 app.use(cors({
-    origin: ["http://localhost:3000"],
+    origin: ["http://localhost:3000","*"],
     methods: ["POST", "PUT", "GET", "DELETE"],
-    allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept'
+    allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept',
+    credentials:true
 }))
 
 

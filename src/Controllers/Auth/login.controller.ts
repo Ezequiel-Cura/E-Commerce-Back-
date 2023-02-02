@@ -5,6 +5,9 @@ import { getUser } from "../../Services/auth/user.services";
 import Joi from "joi";
 import bcrypt, { hash } from "bcrypt"
 
+import jwt from "jsonwebtoken"
+import dotenv from "dotenv"
+dotenv.config()
 
 
 const schema = Joi.object({
@@ -14,23 +17,50 @@ const schema = Joi.object({
 
 const login =async (req:Request,res:Response) => {
     const {email,password} = req.body
+
     try {
         const {error} = schema.validate({
             email,
             password
         })
         if(error){
-            res.status(400).send({status:400,msg:"Missing value mail, password. Invalid values"})
+            throw {statusCode: 400, msg:"Missing value email, password. Invalid values"}
         }
-        const userFound = await getUser(req.body)
+        const userFound = await getUser(email)
 
+        if(!userFound) throw {statusCode:400, msg:"User not found"}
         const validPassword = await bcrypt.compare(password,userFound.password)
-        if(!validPassword) return res.status(400).send({status:400,msg:"Invalid Password"})
-        res.status(200).send({status:200,body: userFound})
+        if(!validPassword) throw {statusCode:400,msg:"Invalid Password"}
+        
+        console.log("hola---------------")
+        const accessToken = jwt.sign(
+            {
+                "email":userFound.email
+            },
+            process.env.ACCESS_TOKEN_SECRET as string,
+            {expiresIn:"15m"}
+        )
 
-        res.status(200).send()
-    } catch (error) {
-        res.status(400).send(error)
+        const refreshToken = jwt.sign(
+            {
+                "email":userFound.email
+            },
+            process.env.REFRESH_TOKEN_SECRET as string,
+            {expiresIn:"1d"}
+        )
+        userFound.refreshToken = refreshToken;
+        await userFound.save()
+        res.cookie('jwt',refreshToken,{httpOnly:true,maxAge:24 * 60 * 60 * 1000})
+        res.status(200).send({
+            status:200,
+            user: userFound,
+            accessToken
+        })
+
+        
+    } catch (error:any) {
+        console.log(error)
+        res.status(error.statusCode).send(error.msg)
     } 
     
 }

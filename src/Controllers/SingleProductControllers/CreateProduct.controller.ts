@@ -18,7 +18,13 @@ const schema = Joi.object({
 
 const createProductController = async (req:Request,res:Response)=>{
     
-    const {name,stock,product_price,presentation,categories_string} = req.body
+    let {name,stock,product_price,presentation,categories_string} = req.body
+    if(!categories_string) {
+        categories_string = ""
+    }
+    if(!req.body.variants){
+        req.body.variants = ""
+    }
     const categories = categories_string.length === 0 ? [] : JSON.parse(categories_string)
     const variants = req.body.variants.length === 0 ? [] : JSON.parse(req.body.variants)
     console.log(req.files)
@@ -36,9 +42,19 @@ const createProductController = async (req:Request,res:Response)=>{
         if(productFound) throw "That name already exist"
 
         let product_image = req.files?.product_image as fileUpload.UploadedFile
+        let default_img = "";
+        let img_obj:any;
+        console.log("img---",product_image)
+        if(!product_image){
+            default_img = "e-commerce/unavailable-image.jpg"
+        }else{
+            img_obj = await uploadImage(`${product_image?.tempFilePath}`)
+        }
+
+        console.log("img---",default_img)
 
         
-        const img_obj = await uploadImage(`${product_image?.tempFilePath}`)
+        console.log("LLEgue")
         
         
         const product = await Product.create({
@@ -46,12 +62,14 @@ const createProductController = async (req:Request,res:Response)=>{
             name,
             stock,
             product_price,
-            product_image: img_obj.public_id,
+            product_image: default_img.length > 1 ? default_img : img_obj.public_id,
             presentation,
             categories,
             variants
         })
-        res.send("Product created succesfully\n" + product)
+
+
+        res.send({msg:"Product created succesfully\n" ,product})
         
     } catch (err:any) {
         res.status(400).send("An error ocurred on createProduct\n"+ err.message)
