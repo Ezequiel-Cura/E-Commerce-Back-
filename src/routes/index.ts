@@ -10,7 +10,7 @@ import refresToken from "./refreshToken"
 
 const router = Router()
 
-router.use("/User",UserRoutes);
+router.use("/user",UserRoutes);
 router.use("/Product",ProductRoutes);
 router.use("/Products",ProductsRoutes)
 router.use("/auth",AuthRoutes)

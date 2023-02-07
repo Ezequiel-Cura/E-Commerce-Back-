@@ -12,9 +12,13 @@ const handleLogOut =async (req:Request,res:Response) => {
     const refreshToken = cookies.jwt;
 
     const userFound = await getUserWithRefreshToken(refreshToken)
+    console.log("LOGOUT")
     console.log(userFound)
     if(!userFound) {
-        res.clearCookie('jwt',{httpOnly:true,maxAge: 24 * 60 * 60 * 1000})
+        res.clearCookie('jwt',{
+            maxAge: 24 * 60 * 60 * 1000,
+            httpOnly:true,
+        })
         return res.sendStatus(204)
     }
 
@@ -24,7 +28,10 @@ const handleLogOut =async (req:Request,res:Response) => {
     await userFound.save()
     
 
-    res.clearCookie('jwt',{httpOnly:true,maxAge: 24 * 60 * 60 * 1000}) // secure:true - only en server on https (on production)
+    res.clearCookie('jwt',{
+        maxAge: 24 * 60 * 60 * 1000,
+        httpOnly:true,
+    }) // secure:true - only en server on https (on production)
     res.sendStatus(204)
 }
 

@@ -1,3 +1,4 @@
+import { string } from "joi";
 import {model,Schema,Document} from "mongoose"
 
 export interface IUser extends Document{
@@ -35,6 +36,12 @@ const userSchema = new Schema({
     refreshToken:{
         type:String,
         default:""
+    },
+    roles:{
+        type:Object,
+        default:{
+            "client": 21342
+        }
     }
     
 });

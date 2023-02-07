@@ -26,7 +26,7 @@ const handleRefreshToken =async (req:Request,res:Response) => {
                         "email":userFound.email
                     },
                     process.env.ACCESS_TOKEN_SECRET!,
-                    {expiresIn:"30s"}
+                    {expiresIn:"15m"}
                 )
                 res.json({accessToken})
             }

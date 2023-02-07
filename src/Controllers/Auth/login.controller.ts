@@ -19,6 +19,7 @@ const login =async (req:Request,res:Response) => {
     const {email,password} = req.body
 
     try {
+
         const {error} = schema.validate({
             email,
             password
@@ -27,6 +28,11 @@ const login =async (req:Request,res:Response) => {
             throw {statusCode: 400, msg:"Missing value email, password. Invalid values"}
         }
         const userFound = await getUser(email)
+
+        // if(userFound?.refreshToken){
+        //     throw {statusCode: 400, msg:"Already login"}
+        // }
+
 
         if(!userFound) throw {statusCode:400, msg:"User not found"}
         const validPassword = await bcrypt.compare(password,userFound.password)
@@ -38,7 +44,7 @@ const login =async (req:Request,res:Response) => {
                 "email":userFound.email
             },
             process.env.ACCESS_TOKEN_SECRET as string,
-            {expiresIn:"15m"}
+            {expiresIn:"30s"}
         )
 
         const refreshToken = jwt.sign(
@@ -50,11 +56,23 @@ const login =async (req:Request,res:Response) => {
         )
         userFound.refreshToken = refreshToken;
         await userFound.save()
-        res.cookie('jwt',refreshToken,{httpOnly:true,maxAge:24 * 60 * 60 * 1000})
+
+        res.cookie('jwt',refreshToken,{
+            maxAge:24 * 60 * 60 * 1000,
+            httpOnly:true
+        })
+
+        
         res.status(200).send({
             status:200,
-            user: userFound,
+            user: {
+                name:userFound.name,
+                email:userFound.email,
+                isAdmin:userFound.isAdmin,
+                img: userFound.img
+            },
             accessToken
+            
         })
 
         

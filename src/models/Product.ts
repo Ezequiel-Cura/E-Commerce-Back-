@@ -10,7 +10,8 @@ export interface IProduct extends Document{
     presentation:string,
     categories: Array<string>,
     out_of_stcok: boolean,
-    variants: Array<string>
+    variants: Array<string>,
+    feature:boolean
 }
 
 const productSchema = new Schema({

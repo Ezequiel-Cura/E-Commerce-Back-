@@ -1,15 +1,15 @@
 import { Request,Response } from "express";
 import Product from "../../models/Product"
-
+import { deleteProductService } from "../../Services/Product/Product.service";
 
 const deleteProduct = async (req: Request, res: Response)=>{
     try {
-        const {name} = req.body
-        await Product.deleteOne({name : name})
-        res.send({"msg": "Deleted succesfully"})
+        const {name} = req.body;
+        const deletedProduct = await deleteProductService(name)
+        res.status(200).send({msg: "Product deleted succesfully"})
         
-    } catch (error) {
-        res.send({"msg": "An Error ocurred at deleteProducts: " + error})
+    } catch (error:any) {
+        res.status(error.statusCode).send({msg: error.msg})
     }
 }
 

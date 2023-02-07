@@ -21,12 +21,12 @@ const createUser = async (name:string,email:string,passwordHash:string)=>{
 
 const getUser = async (email:string)=>{
     try {
-        console.log(email)
+        
 
         const user = await  User.findOne({
           email:email
         })
-        console.log(user)
+       
         
         return user
     } catch (error:any) {
