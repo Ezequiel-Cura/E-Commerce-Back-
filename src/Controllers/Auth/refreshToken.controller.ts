@@ -9,7 +9,7 @@ const handleRefreshToken =async (req:Request,res:Response) => {
     const cookies = req.cookies
 
     if(!cookies?.jwt) return res.sendStatus(401);
-    console.log(cookies.jwt)
+    
     const refreshToken = cookies.jwt;
 
     const userFound = await getUserWithRefreshToken(refreshToken)
@@ -26,7 +26,7 @@ const handleRefreshToken =async (req:Request,res:Response) => {
                         "email":userFound.email
                     },
                     process.env.ACCESS_TOKEN_SECRET!,
-                    {expiresIn:"15m"}
+                    {expiresIn:"1m"}
                 )
                 res.json({accessToken})
             }

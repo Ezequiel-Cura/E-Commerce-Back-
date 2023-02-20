@@ -39,17 +39,23 @@ const getAllUsers = async (email:string)=>{
     try {
         const allUsers = await User.find()
         // console.log("email",email)
-        const userExist = allUsers.map((user)=>{
-            if(user.email === email) {
-                return true
-            }else{
-                return false
-            }
+        const userExist = allUsers.find((user)=>{
+            if(user.email === email) return true
+            else return false
         })
-        // console.log("Includes",userExist.includes(true))
-        if(userExist.includes(true))return true
+        // const userExist = allUsers.map((user)=>{
+        //     if(user.email === email) {
+        //         return true
+        //     }else{
+        //         return false
+        //     }
+        // })
+       
+        // if(userExist.includes(true))return true
+        // else return false
+
+        if(userExist)return true
         else return false
-        
     } catch (error) {
         throw error
     }

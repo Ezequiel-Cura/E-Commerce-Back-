@@ -10,10 +10,6 @@ const getProductService = async(id:string)=>{
     return product
 }
 
-const updateProduct = async()=>{
-
-}
-
 const deleteProductService = async(name:string)=>{
     try {
         const deleteProduct = await Product.deleteOne({
@@ -26,6 +22,26 @@ const deleteProductService = async(name:string)=>{
     }
 }
 
+// ALL TYPES OF UPDATE PRODUCT
 
 
-export {createProduct,getProductService,updateProduct,deleteProductService}
+const updateProductFeatureService = async(id:string)=>{
+    const product = await Product.findOne({product_id: id})
+    if(!product) throw {statusCode:404,msg: "Product not found"}
+
+    product.feature = !product.feature
+    await product.save()
+    return 
+}
+
+
+
+
+
+
+export {
+    createProduct,
+    getProductService,
+    deleteProductService,
+    updateProductFeatureService,
+}

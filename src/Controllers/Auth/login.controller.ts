@@ -44,7 +44,7 @@ const login =async (req:Request,res:Response) => {
                 "email":userFound.email
             },
             process.env.ACCESS_TOKEN_SECRET as string,
-            {expiresIn:"30s"}
+            {expiresIn:"1h"}
         )
 
         const refreshToken = jwt.sign(
@@ -52,7 +52,7 @@ const login =async (req:Request,res:Response) => {
                 "email":userFound.email
             },
             process.env.REFRESH_TOKEN_SECRET as string,
-            {expiresIn:"1d"}
+            {expiresIn:"15s"}
         )
         userFound.refreshToken = refreshToken;
         await userFound.save()
