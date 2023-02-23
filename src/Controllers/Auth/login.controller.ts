@@ -52,7 +52,7 @@ const login =async (req:Request,res:Response) => {
                 "email":userFound.email
             },
             process.env.REFRESH_TOKEN_SECRET as string,
-            {expiresIn:"15s"}
+            {expiresIn:"1d"}
         )
         userFound.refreshToken = refreshToken;
         await userFound.save()

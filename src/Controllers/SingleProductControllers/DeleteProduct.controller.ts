@@ -4,8 +4,9 @@ import { deleteProductService } from "../../Services/Product/Product.service";
 
 const deleteProduct = async (req: Request, res: Response)=>{
     try {
+        const {id} = req.params
         const {name,product_id} = req.body;
-        const deletedProduct = await deleteProductService(name)
+        const deletedProduct = await deleteProductService(id)
         res.status(200).send({msg: "Product deleted succesfully"})
         
     } catch (error:any) {

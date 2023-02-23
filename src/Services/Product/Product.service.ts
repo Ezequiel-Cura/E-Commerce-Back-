@@ -10,10 +10,10 @@ const getProductService = async(id:string)=>{
     return product
 }
 
-const deleteProductService = async(name:string)=>{
+const deleteProductService = async(id:string)=>{
     try {
         const deleteProduct = await Product.deleteOne({
-            name : name
+            product_id : id
         })
         
         return deleteProduct

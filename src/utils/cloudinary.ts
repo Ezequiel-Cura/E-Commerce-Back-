@@ -12,7 +12,8 @@ cloudinary.v2.config({
 
 export async function uploadImage(filepath:string) {
     return await cloudinary.v2.uploader.upload(filepath,{
-        folder:"e-commerce"
+        folder:"e-commerce",
+        background_removal: "cloudinary_ai"
     })
 }
 
