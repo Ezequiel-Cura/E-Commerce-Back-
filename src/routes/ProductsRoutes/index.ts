@@ -2,9 +2,10 @@ import { Router } from "express";
 const router = Router()
 
 import getProducts from "../../Controllers/ProductsControllers/getProducts.controller"
+import getFilteredProducts from "../../Controllers/ProductsControllers/getFilteredProducts.controller";
 
-
-router.get("/",getProducts)
+router.get("/:category",getFilteredProducts)
+    .get("/",getProducts)
     // .put("/")
     // .delete("/")
     //.post("/")

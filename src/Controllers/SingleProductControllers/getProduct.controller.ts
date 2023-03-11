@@ -12,7 +12,11 @@ const getProduct =async (req:Request,res: Response) => {
                 product_id: product.product_id,
                 name:product.name,
                 product_image:product.product_image,
-                feature:product.feature
+                feature:product.feature,
+                product_price: product.product_price,
+                categories: product.categories,
+                variants:product.variants,
+                presentation:product.presentation
             }
         })
     } catch (error) {
