@@ -27,7 +27,7 @@ const createProductController = async (req:Request,res:Response)=>{
     }
     const categories = categories_string.length === 0 ? [] : JSON.parse(categories_string)
     const variants = req.body.variants.length === 0 ? [] : JSON.parse(req.body.variants)
-    console.log(req.files)
+    
     try {
         const {error} = schema.validate({
             name:name,

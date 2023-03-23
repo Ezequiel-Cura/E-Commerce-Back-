@@ -5,6 +5,7 @@ import cors from "cors"
 import router from "./routes";
 import cookieParser from "cookie-parser"
 
+
 import fileUpload from "express-fileupload";
 
 //Initializations
@@ -28,8 +29,10 @@ app.use(fileUpload({
     tempFileDir: "./uploads"
 }))
 
+
+
 app.use(cors({
-    origin: ["http://localhost:3000","*"],
+    origin: [`${process.env.FRONT_URL_1}`,`${process.env.FRONT_URL_2}`,`${process.env.FRONT_URL_3}`],
     methods: ["POST", "PUT", "GET", "DELETE"],
     allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept,Authorization',
     credentials:true
@@ -38,7 +41,7 @@ app.use(cors({
 
 //Routes
 app.get("/",(req,res)=>{
-    res.send("The api is at http://localhost:" + app.get("port"))
+    res.send("Hi welcome to the rico y sano services")
 });
 app.use("/",router)
 
