@@ -34,10 +34,10 @@ const handleLogOut =async (req:Request,res:Response) => {
         httpOnly:true,
         secure:true,
         sameSite:"lax"
-    }) // secure:true - only en server on https (on production)
+    }) 
     res.sendStatus(204)
 }
 
-
+// secure:true - only en server on https (on production)
 
 export default handleLogOut

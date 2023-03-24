@@ -59,11 +59,10 @@ const login =async (req:Request,res:Response) => {
 
         res.cookie('jwt',refreshToken,{
             maxAge:24 * 60 * 60 * 1000,
-            httpOnly:true,
+            // httpOnly:true,
             secure:true,
             sameSite:"lax"
         })
-
         
         res.status(200).send({
             status:200,
@@ -73,13 +72,11 @@ const login =async (req:Request,res:Response) => {
                 isAdmin:userFound.isAdmin,
                 img: userFound.img
             },
-            accessToken
-            
+            accessToken            
         })
 
         
-    } catch (error:any) {
-        
+    } catch (error:any) {        
         res.status(error.statusCode).send(error.msg)
     } 
     

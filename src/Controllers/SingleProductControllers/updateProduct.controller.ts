@@ -9,17 +9,14 @@ const updateProduct =async (req:Request,res: Response) => {
     const quantity = req.body?.update_value?.quantity
     const feature = req.body?.update_value?.feature
     const name = req.body?.update_value?.name
-
-    // const {feature,name} = req.body?.update_value 
+    
     console.log(feature,name,quantity)
     if(!product_id){       
         return res.status(400).send({msg:"Missing product_id"})
     }
     if(quantity === undefined && feature === undefined && name === undefined){
         return res.status(400).send({msg:"Missing key values for update"})
-    }
-
-    
+    }    
     
     try {
         if(feature){
