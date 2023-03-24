@@ -38,7 +38,7 @@ const login =async (req:Request,res:Response) => {
         const validPassword = await bcrypt.compare(password,userFound.password)
         if(!validPassword) throw {statusCode:400,msg:"Invalid Password"}
         
-        console.log("hola---------------")
+        
         const accessToken = jwt.sign(
             {
                 "email":userFound.email
@@ -59,7 +59,9 @@ const login =async (req:Request,res:Response) => {
 
         res.cookie('jwt',refreshToken,{
             maxAge:24 * 60 * 60 * 1000,
-            httpOnly:true
+            httpOnly:true,
+            secure:true,
+            sameSite:"lax"
         })
 
         
@@ -77,7 +79,7 @@ const login =async (req:Request,res:Response) => {
 
         
     } catch (error:any) {
-        console.log(error)
+        
         res.status(error.statusCode).send(error.msg)
     } 
     

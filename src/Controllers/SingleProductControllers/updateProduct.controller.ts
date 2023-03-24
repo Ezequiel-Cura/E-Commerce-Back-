@@ -5,7 +5,7 @@ import { updateProductFeatureService } from "../../Services/Product/Product.serv
 
 const updateProduct =async (req:Request,res: Response) => {
     const {product_id} = req.body
-    console.log(req.body)
+    
     const quantity = req.body?.update_value?.quantity
     const feature = req.body?.update_value?.feature
     const name = req.body?.update_value?.name

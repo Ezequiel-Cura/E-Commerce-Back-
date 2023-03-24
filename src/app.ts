@@ -21,6 +21,7 @@ app.use(cookieParser())
 
 app.use(bodyParser.json())
 
+
 app.use(bodyParser.urlencoded({
     extended:true
 }))
@@ -32,7 +33,7 @@ app.use(fileUpload({
 
 
 app.use(cors({
-    origin: [`${process.env.FRONT_URL_1}`,`${process.env.FRONT_URL_2}`,`${process.env.FRONT_URL_3}`],
+    origin: [`${process.env.FRONT_URL_1}`,`${process.env.FRONT_URL_2}`,`${process.env.FRONT_URL_3}`,"http://localhost:3000"],
     methods: ["POST", "PUT", "GET", "DELETE"],
     allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept,Authorization',
     credentials:true
