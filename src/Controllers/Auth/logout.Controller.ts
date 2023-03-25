@@ -18,8 +18,7 @@ const handleLogOut =async (req:Request,res:Response) => {
             maxAge: 24 * 60 * 60 * 1000,
             httpOnly:true,
             secure:true,
-            sameSite:"lax",
-            domain:"e-commerce-front-ezequiel-cura.vercel.app"
+            sameSite:"lax"            
         })
         return res.sendStatus(204)
     }
@@ -27,15 +26,13 @@ const handleLogOut =async (req:Request,res:Response) => {
     //Delete refreshToken in db
 
     userFound.refreshToken = "";
-    await userFound.save()
-    
+    await userFound.save()    
 
     res.clearCookie('jwt',{
         maxAge: 24 * 60 * 60 * 1000,
         httpOnly:true,
         secure:true,
-        sameSite:"lax",
-        domain:"e-commerce-front-ezequiel-cura.vercel.app"
+        sameSite:"lax"
     }) 
     res.sendStatus(204)
 }

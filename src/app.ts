@@ -19,6 +19,8 @@ app.use(morgan("dev"))
 
 app.use(cookieParser())
 
+app.set("trust proxy", 1);
+
 app.use(bodyParser.json())
 
 app.use(bodyParser.urlencoded({

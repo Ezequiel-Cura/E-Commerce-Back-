@@ -33,7 +33,6 @@ const login =async (req:Request,res:Response) => {
         //     throw {statusCode: 400, msg:"Already login"}
         // }
 
-
         if(!userFound) throw {statusCode:400, msg:"User not found"}
         const validPassword = await bcrypt.compare(password,userFound.password)
         if(!validPassword) throw {statusCode:400,msg:"Invalid Password"}
@@ -61,11 +60,11 @@ const login =async (req:Request,res:Response) => {
             maxAge:24 * 60 * 60 * 1000,
             httpOnly:true,
             secure:true,
-            sameSite:"lax",
-            domain:"e-commerce-front-ezequiel-cura.vercel.app"
+            sameSite:"lax"
+            
         })
         
-        res.status(200).send({
+        return res.status(200).send({
             status:200,
             user: {
                 name:userFound.name,
