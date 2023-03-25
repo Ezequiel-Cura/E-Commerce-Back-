@@ -18,7 +18,8 @@ const handleLogOut =async (req:Request,res:Response) => {
             maxAge: 24 * 60 * 60 * 1000,
             httpOnly:true,
             secure:true,
-            sameSite:"lax"            
+            sameSite:"lax",
+            path:"/"
         })
         return res.sendStatus(204)
     }
@@ -32,7 +33,8 @@ const handleLogOut =async (req:Request,res:Response) => {
         maxAge: 24 * 60 * 60 * 1000,
         httpOnly:true,
         secure:true,
-        sameSite:"lax"
+        sameSite:"lax",
+        path:"/"
     }) 
     res.sendStatus(204)
 }

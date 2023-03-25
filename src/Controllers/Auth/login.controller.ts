@@ -60,8 +60,8 @@ const login =async (req:Request,res:Response) => {
             maxAge:24 * 60 * 60 * 1000,
             httpOnly:true,
             secure:true,
-            sameSite:"lax"
-            
+            sameSite:"lax",
+            path:"/"
         })
         
         return res.status(200).send({
