@@ -59,9 +59,10 @@ const login =async (req:Request,res:Response) => {
 
         res.cookie('jwt',refreshToken,{
             maxAge:24 * 60 * 60 * 1000,
-            // httpOnly:true,
+            httpOnly:true,
             secure:true,
-            sameSite:"lax"
+            sameSite:"lax",
+            domain:".vercel.app"
         })
         
         res.status(200).send({
