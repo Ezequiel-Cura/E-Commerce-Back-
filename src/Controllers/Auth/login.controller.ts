@@ -62,7 +62,7 @@ const login =async (req:Request,res:Response) => {
             httpOnly:true,
             secure:true,
             sameSite:"lax",
-            domain:".vercel.app"
+            domain:"e-commerce-front-ezequiel-cura.vercel.app"
         })
         
         res.status(200).send({

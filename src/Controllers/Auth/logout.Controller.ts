@@ -18,7 +18,8 @@ const handleLogOut =async (req:Request,res:Response) => {
             maxAge: 24 * 60 * 60 * 1000,
             httpOnly:true,
             secure:true,
-            sameSite:"lax"
+            sameSite:"lax",
+            domain:"e-commerce-front-ezequiel-cura.vercel.app"
         })
         return res.sendStatus(204)
     }
@@ -33,7 +34,8 @@ const handleLogOut =async (req:Request,res:Response) => {
         maxAge: 24 * 60 * 60 * 1000,
         httpOnly:true,
         secure:true,
-        sameSite:"lax"
+        sameSite:"lax",
+        domain:"e-commerce-front-ezequiel-cura.vercel.app"
     }) 
     res.sendStatus(204)
 }
