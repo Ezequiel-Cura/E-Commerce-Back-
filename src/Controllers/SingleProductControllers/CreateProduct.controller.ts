@@ -10,7 +10,7 @@ import { uploadImage,deleteImage } from "../../utils/cloudinary";
 const schema = Joi.object({
     name: Joi.string().required(),
     stock:Joi.number(),
-    product_price: Joi.number().required(),
+    product_price: Joi.number(),
     presentation:Joi.string(),
     categories: Joi.array().items(Joi.string())
 })
