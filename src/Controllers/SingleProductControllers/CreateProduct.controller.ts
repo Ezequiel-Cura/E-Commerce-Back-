@@ -25,6 +25,15 @@ const createProductController = async (req:Request,res:Response)=>{
     if(!req.body.variants){
         req.body.variants = ""
     }
+    if(!presentation){
+        presentation = ""
+    }
+    if(!product_price){
+        product_price = 0
+    }
+    if(!stock){
+        stock = 0;
+    }
     const categories = categories_string.length === 0 ? [] : JSON.parse(categories_string)
     const variants = req.body.variants.length === 0 ? [] : JSON.parse(req.body.variants)
     
@@ -44,17 +53,17 @@ const createProductController = async (req:Request,res:Response)=>{
         let product_image = req.files?.product_image as fileUpload.UploadedFile
         let default_img = "";
         let img_obj:any;
-        console.log("img---",product_image)
+        // console.log("img---",product_image)
         if(!product_image){
             default_img = "e-commerce/unavailable-image.jpg"
         }else{
             img_obj = await uploadImage(`${product_image?.tempFilePath}`)
         }
 
-        console.log("img---",default_img)
+        // console.log("img---",default_img)
 
         
-        console.log("LLEgue")
+        // console.log("LLEgue")
         
         
         const product = await Product.create({
@@ -72,8 +81,8 @@ const createProductController = async (req:Request,res:Response)=>{
         res.send({msg:"Product created succesfully\n" ,product})
         
     } catch (err:any) {
-        res.status(400).send("An error ocurred on createProduct\n"+ err.message)
-        console.log(err)
+        res.status(400).send("An error ocurred on createProduct\n "+ err.message)
+        // console.log(err)
     }
 }
 
