@@ -28,8 +28,8 @@ const createProductController = async (req:Request,res:Response)=>{
     if(!presentation){
         presentation = ""
     }
-    if(!product_price){
-        product_price = 0
+    if(!product_price || product_price === 0){
+        product_price = Math.round( Math.random() * (300 - 100) + 100)
     }
     if(!stock){
         stock = 0;
@@ -82,7 +82,7 @@ const createProductController = async (req:Request,res:Response)=>{
         
     } catch (err:any) {
         res.status(400).send("An error ocurred on createProduct\n "+ err.message)
-        // console.log(err)
+        console.log(err)
     }
 }
 

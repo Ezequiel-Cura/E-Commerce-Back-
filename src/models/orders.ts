@@ -31,7 +31,7 @@ const orderSchema = new Schema({
         type:String
     },
     products:{
-        type:[Object]
+        type:Array<products>
     },
     totalPrice:{
         type:Number

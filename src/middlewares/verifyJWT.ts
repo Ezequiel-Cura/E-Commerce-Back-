@@ -7,7 +7,7 @@ dotenv.config()
 
 const verifyJWT = (req:Request,res:Response,next:NextFunction)=>{
     const authHeader = req.headers['authorization'] as string
-    
+   
 
     if(!authHeader) return res.sendStatus(401)
     // Bearer 'token'

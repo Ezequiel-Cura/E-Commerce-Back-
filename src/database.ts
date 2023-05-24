@@ -7,7 +7,7 @@ const {DB_USER,DB_PASSWORD,DB_NAME} = process.env
 const connectDB = async () => {
 try {
     const db = await mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.ipxfoyc.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`);
-    console.log("Mongodb is connected to", db.connection.host);
+   
     console.log("Si no muestra cambios fijate si compilaste")
 } catch (error) {
     console.error(error);
