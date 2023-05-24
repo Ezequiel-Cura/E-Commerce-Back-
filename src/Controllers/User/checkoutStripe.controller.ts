@@ -1,10 +1,11 @@
 import { Request,Response } from "express";
 import Orders from "../../models/orders"
-import dotenv from "dotenv"
-dotenv.config()
 import { IProductsingle } from "../../utils/Interfaces";
 const stripe = require('stripe')(process.env.STRIPE_API_KEY);
 
+import dotenv from "dotenv"
+dotenv.config()
+const {FRONT_URL_1,FRONT_URL_2,FRONT_URL_3} = process.env
 
 
 
@@ -33,8 +34,8 @@ const checkoutStripe = async(req:Request,res:Response)=>{
         const session = await stripe.checkout.sessions.create({
             line_items,
             mode: 'payment',
-            success_url: `${process.env.FRONT_URL}/checkout-success`,
-            cancel_url: `${process.env.FRONT_URL}/cart`,
+            success_url: `${FRONT_URL_2}/checkout-success`,
+            cancel_url: `${FRONT_URL_2}/cart`,
           });
         
         //   res.redirect(303, session.url);
