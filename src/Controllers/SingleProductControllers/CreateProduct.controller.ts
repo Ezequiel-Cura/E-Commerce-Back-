@@ -17,8 +17,9 @@ const schema = Joi.object({
 
 
 const createProductController = async (req:Request,res:Response)=>{
-    
+    console.log(req.body)
     let {name,stock,product_price,presentation,categories_string} = req.body
+    product_price = Number(product_price)
     if(!categories_string) {
         categories_string = ""
     }
@@ -29,7 +30,7 @@ const createProductController = async (req:Request,res:Response)=>{
         presentation = ""
     }
     if(!product_price || product_price === 0){
-        product_price = Math.round( Math.random() * (300 - 100) + 100)
+        product_price = Math.round( Math.random() * (900 - 300) + 300)
     }
     if(!stock){
         stock = 0;

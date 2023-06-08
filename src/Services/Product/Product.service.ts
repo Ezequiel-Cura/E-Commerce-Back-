@@ -1,4 +1,5 @@
 import Product from "../../models/Product";
+import { deleteImage } from "../../utils/cloudinary";
 
 const createProduct = async()=>{
 
@@ -15,7 +16,9 @@ const deleteProductService = async(id:string)=>{
         const deleteProduct = await Product.deleteOne({
             product_id : id
         })
+       
         
+
         return deleteProduct
     } catch (error:any) {
         throw {statusCode:500,msg:error.msg}

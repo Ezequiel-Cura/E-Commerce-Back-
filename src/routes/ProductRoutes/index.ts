@@ -17,6 +17,6 @@ import verifyJWT from "../../middlewares/verifyJWT";
 router.post("/",verifyJWT,createProductController)
     .get("/:id",getProduct)
     .put("/",verifyJWT,updateProductController)
-    .delete("/:id",verifyJWT,deleteProduct)
+    .delete("/:id&:image",verifyJWT,deleteProduct)
 
 export default router;

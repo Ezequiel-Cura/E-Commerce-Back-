@@ -30,6 +30,7 @@ const checkoutStripe = async(req:Request,res:Response)=>{
             quantity: c.quantity,
           }
     })
+    
     try {
         const session = await stripe.checkout.sessions.create({
             line_items,
